@@ -1,0 +1,28 @@
+<section>
+    <div class="title">
+        <h1> Cadastro de Contato </h1>
+    </div>
+</section>
+<section>
+    <form class="formContatos" [formGroup]="formContatos">
+        <div>
+            <div>
+                <span>Nome:</span>
+                <input formControlName="nome" type="text" name="nome">
+            </div>
+            
+            <div>
+                <span>Email:</span>
+                <input formControlName="email" type="email" name="email">
+            </div>
+            <div>
+                <span>Telefone:</span>
+                <input formControlName="telefone" type="text" name="telefone">
+            </div>
+            <div>
+                <button mat-raised-button color="primary" (click)="saveContato()">Salvar Contato</button>
+                <button mat-raised-button color="primary" (click)="cancelar()">Cancelar</button>
+            </div>
+        </div>
+    </form>
+</section>

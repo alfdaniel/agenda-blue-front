@@ -1,0 +1,39 @@
+.title{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+table{
+        border: 0.5px solid rgb(14, 11, 158);
+        border-collapse: collapse;
+        width: 80%;
+        table-layout: fixed;
+        
+        thead tr {
+            background-color: #d45704;
+            color: white;
+            font-size: 15px;
+            th{
+                padding: 5px;
+            }
+        }
+}
+
+table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+}
+
+.maticon{
+    display: flex;
+    justify-content: center;
+    mat-icon {
+        margin: 5px;
+    }
+}
+
+.tableTitle{
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,32 @@
+<section>
+    <div class="title">
+        <h1>Lista de contatos</h1>
+    </div>
+</section>
+<section >
+    <div class="tableTitle">
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Telefone</th>
+                    <th>Menu</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let contato of listContatos">
+                    <td data-label="Nome">{{contato.nome}}</td>
+                    <td data-label="Email">{{contato.email}}</td>
+                    <td data-label="Telefone">{{contato.telefone}}</td>
+                    <td>
+                        <div class="maticon">
+                            <mat-icon (click)="deleteContatos(contato)">delete</mat-icon>
+                            <mat-icon >edit</mat-icon>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
