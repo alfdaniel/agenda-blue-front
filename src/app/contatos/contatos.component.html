@@ -1,8 +1,15 @@
-<section>
+<section >
     <div class="title">
         <h1>Lista de contatos</h1>
     </div>
+    <!-- <div>
+        <input  class="search" type="text" name="" placeholder="Buscar por nome...">
+        <a class="search-btn" >
+            <mat-icon>search</mat-icon>
+        </a>
+    </div> -->
 </section>
+
 <section >
     <div class="tableTitle">
         <table>
@@ -22,7 +29,7 @@
                     <td>
                         <div class="maticon">
                             <mat-icon (click)="deleteContatos(contato)">delete</mat-icon>
-                            <mat-icon >edit</mat-icon>
+                            <mat-icon (click)="editContatos(contato)">edit</mat-icon>
                         </div>
                     </td>
                 </tr>

@@ -5,7 +5,7 @@
 </section>
 <section>
     <form class="formContatos" [formGroup]="formContatos">
-        <div>
+        <div class="formDivs">
             <div>
                 <span>Nome:</span>
                 <input formControlName="nome" type="text" name="nome">
@@ -21,7 +21,8 @@
             </div>
             <div>
                 <button mat-raised-button color="primary" (click)="saveContato()">Salvar Contato</button>
-                <button mat-raised-button color="primary" (click)="cancelar()">Cancelar</button>
+                <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+                <button mat-raised-button color="primary" (click)="editContatoForm(contatos)">Editar Contato</button>
             </div>
         </div>
     </form>

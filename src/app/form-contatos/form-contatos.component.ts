@@ -13,13 +13,6 @@ import { ContatoService } from '../service/contato-service/contato.service';
 })
 export class FormContatosComponent implements OnInit {
   
-  // formContatos = new FormGroup({
-  //   id: new FormControl(''),
-  //   nome: new FormControl('', [Validators.required]),
-  //   email: new FormControl('', [Validators.required, Validators.email]),
-  //   telefone: new FormControl('', [Validators.required])
-  // });
-  
   formContatos!: FormGroup;
   contatos!: Contatos;
 
@@ -31,7 +24,18 @@ export class FormContatosComponent implements OnInit {
     this.formContatos = this.formBuild.group({
       nome: '',
       email: '',
-      telefone: ''
+      telefone: '',
+      id: ''
+      });
+
+     this.contatoService.clickEdit.subscribe(edit => {
+        if (edit !== null){ 
+          console.log(edit, 'valor do edit');
+          this.formContatos.get('nome')?.setValue(edit.nome);
+          this.formContatos.get('email')?.setValue(edit.email);
+          this.formContatos.get('telefone')?.setValue(edit.telefone);
+          this.formContatos.get('id')?.setValue(edit.id);          
+        }
       });
   }
 
@@ -46,6 +50,7 @@ export class FormContatosComponent implements OnInit {
       email,
       telefone
     };
+    console.log('valor do save contato ' + contatos);
     this.contatoService.createContato(contatos).subscribe(
       data => {
         setTimeout(function(){
@@ -54,7 +59,7 @@ export class FormContatosComponent implements OnInit {
             text: 'Cadastrado com sucesso!',
             timer: 5000
           });
-        },2000);
+        },100);
           this.router.navigate(['contatos']);
         },
         error => {
@@ -65,6 +70,33 @@ export class FormContatosComponent implements OnInit {
           });
         }
     );    
+  }
+
+  editContatoForm(contato: Contatos){
+    const {nome, email, telefone, id} = this.formContatos.value;
+    contato = {
+      nome,
+      email,
+      telefone,
+      id
+    };
+    this.contatoService.updateContatos(contato).subscribe(
+      data => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Eeeeeba..',
+          text: 'Contato editado com sucesso!'
+        });
+        this.router.navigate(['contatos']);
+        },
+        error => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Ooops..',
+            text: 'Erro ao editar contato!'
+          });
+        }
+    );
   }
 
 }

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Contatos } from '../entities/contato';
 import { ContatoService } from '../service/contato-service/contato.service';
@@ -13,7 +14,7 @@ export class ContatosComponent implements OnInit {
 
   listContatos: Contatos[] = [];
 
-  constructor(private contatoService: ContatoService) { }
+  constructor(private contatoService: ContatoService, private router:Router) { }
 
   ngOnInit(): void {
     console.log(this.listContatos)
@@ -47,7 +48,6 @@ export class ContatosComponent implements OnInit {
   deleteContatos(contato: Contatos){
     const id = contato.id
     Swal.fire({
-      //title: 'Você tem certeza?',
       text: 'Deseja deletar?',
       icon: 'warning',
       showCancelButton: true,
@@ -67,6 +67,12 @@ export class ContatosComponent implements OnInit {
         );
       }
     });
+  }
+
+  editContatos(contato: Contatos){
+    console.log("editContato funcionando");
+    this.contatoService.getContatoListById(contato)
+    this.router.navigate(['formcontatos']);
   }
 
 }

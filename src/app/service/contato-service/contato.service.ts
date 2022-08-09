@@ -11,10 +11,16 @@ import { RepositorioService } from '../repository.service';
 })
 export class ContatoService {
   
+  private dataEdit = new BehaviorSubject<Contatos>(null!);
+  clickEdit = this.dataEdit.asObservable();
   api_url = environment.api_url;
 
   constructor(private repositoryService: RepositorioService, private http: HttpClient) { }
   
+  getContatoListById(contatos: Contatos){
+    this.dataEdit.next(contatos);
+  }
+
   getContatosList(): Observable<HttpResponse<Contatos[]>> {
     return this.repositoryService.get<Contatos[]>(this.api_url, RepositorioService.MEDIA_TYPE_APP_JSON);
   }
@@ -38,7 +44,7 @@ export class ContatoService {
     return this.http.get<Contatos>(this.api_url + '/' + id).pipe(
       map(dataContato => {
         if(dataContato){
-          return dataContato
+          return dataContato          
         }else{
           return [];
         }
@@ -61,6 +67,24 @@ export class ContatoService {
   deleteContatos(contato: Contatos){
     const id = contato.id
     return this.http.delete<Contatos>(this.api_url + '/' + id).pipe(
+      map(dataContato => {
+        if (dataContato){
+          return dataContato
+        }else {
+          return [];
+        }
+      })
+    )
+  }
+
+  updateContatos(contato: Contatos){
+    console.log('chegou no update do service ' + contato);
+    console.log(contato);
+    
+    const id = contato.id;
+    console.log(id);
+    
+    return this.http.put<Contatos>(this.api_url + '/' + id, contato).pipe(
       map(dataContato => {
         if (dataContato){
           return dataContato
